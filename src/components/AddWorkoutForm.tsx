@@ -3,12 +3,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
+import { format } from "date-fns";
 
 export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) => void }) {
   const [type, setType] = useState("");
   const [duration, setDuration] = useState("");
   const [calories, setCalories] = useState("");
   const [weight, setWeight] = useState("");
+  const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,7 +26,7 @@ export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) 
     }
 
     const newWorkout = {
-      date: "Today",
+      date: format(new Date(date), 'MMM dd, yyyy'),
       type,
       duration: `${duration} min`,
       calories: parseInt(calories),
@@ -36,6 +38,7 @@ export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) 
     setDuration("");
     setCalories("");
     setWeight("");
+    setDate(format(new Date(), 'yyyy-MM-dd'));
 
     toast({
       title: "Success",
@@ -45,6 +48,16 @@ export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) 
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded-lg bg-card">
+      <div className="space-y-2">
+        <Label htmlFor="date">Date</Label>
+        <Input
+          id="date"
+          type="date"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+        />
+      </div>
+
       <div className="space-y-2">
         <Label htmlFor="type">Workout Type</Label>
         <Input
