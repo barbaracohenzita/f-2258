@@ -31,9 +31,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4 md:p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="mx-auto max-w-7xl">
-        <h1 className="text-3xl font-bold mb-8">Fitness Dashboard</h1>
+        <h1 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent">
+          FITNESS ARCADE
+        </h1>
         
         <div className="grid gap-6 md:grid-cols-3">
           <div className="md:col-span-2">
@@ -43,8 +45,11 @@ const Index = () => {
               ))}
             </div>
           </div>
-          <div>
-            <AddWorkoutForm onAddWorkout={handleAddWorkout} />
+          <div className="space-y-6">
+            <div className="bg-card/50 backdrop-blur-sm p-4 rounded-xl border border-primary/20">
+              <h2 className="text-xl font-bold mb-4 text-center text-primary">New Workout</h2>
+              <AddWorkoutForm onAddWorkout={handleAddWorkout} />
+            </div>
           </div>
         </div>
 

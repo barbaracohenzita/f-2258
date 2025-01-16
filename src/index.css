@@ -4,26 +4,26 @@
  
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 162.9 94.5% 24.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 168 96% 37%;
-    --secondary-foreground: 355.7 100% 97.3%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --background: 240 20% 12%;
+    --foreground: 0 0% 100%;
+    --card: 240 20% 15%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 20% 15%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 326 100% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 266 100% 64%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 20% 20%;
+    --muted-foreground: 240 5% 84%;
+    --accent: 12 100% 50%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 162.9 94.5% 24.3%;
-    --radius: 0.75rem;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 20% 30%;
+    --input: 240 20% 30%;
+    --ring: 326 100% 60%;
+    --radius: 0.5rem;
   }
 }
  
@@ -33,29 +33,47 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
   }
 }
 
 .stat-card {
-  @apply relative overflow-hidden rounded-xl bg-white p-6 shadow-lg transition-all hover:shadow-xl;
+  @apply relative overflow-hidden rounded-xl bg-card p-6 shadow-lg transition-all hover:shadow-xl border border-primary/20;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
 .stat-card::before {
   content: '';
-  @apply absolute inset-0 opacity-5 bg-gradient-to-br from-primary to-secondary;
+  @apply absolute inset-0 opacity-10;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 }
 
 .animate-in {
-  animation: animate-in 0.5s ease-out;
+  animation: arcade-in 0.5s cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }
 
-@keyframes animate-in {
-  from {
+@keyframes arcade-in {
+  0% {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(20px) scale(0.95);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 10px -5px rgba(255, 0, 140, 0.3),
+                0 0 20px -10px rgba(255, 0, 140, 0.2);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    box-shadow: 0 0 15px -5px rgba(255, 0, 140, 0.4),
+                0 0 30px -10px rgba(255, 0, 140, 0.3);
   }
 }

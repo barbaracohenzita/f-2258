@@ -14,26 +14,35 @@ const data = [
 export function ProgressChart() {
   return (
     <Card className="stat-card">
-      <h2 className="text-xl font-semibold mb-4">Weekly Progress</h2>
+      <h2 className="text-xl font-bold mb-4 text-primary">Weekly Progress</h2>
       <div className="h-[200px] w-full">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
-            <XAxis dataKey="date" stroke="#94a3b8" />
-            <YAxis stroke="#94a3b8" />
+            <XAxis 
+              dataKey="date" 
+              stroke="currentColor" 
+              strokeOpacity={0.5}
+              tick={{ fill: 'currentColor', opacity: 0.5 }}
+            />
+            <YAxis 
+              stroke="currentColor"
+              strokeOpacity={0.5}
+              tick={{ fill: 'currentColor', opacity: 0.5 }}
+            />
             <Tooltip
               contentStyle={{
-                backgroundColor: "white",
-                border: "none",
+                backgroundColor: "hsl(240 20% 15%)",
+                border: "1px solid hsl(326 100% 60% / 0.2)",
                 borderRadius: "8px",
-                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                color: "white",
               }}
             />
             <Line
               type="monotone"
               dataKey="weight"
-              stroke="#10B981"
+              stroke="hsl(326 100% 60%)"
               strokeWidth={2}
-              dot={{ fill: "#10B981", strokeWidth: 2 }}
+              dot={{ fill: "hsl(326 100% 60%)", strokeWidth: 2 }}
             />
           </LineChart>
         </ResponsiveContainer>
