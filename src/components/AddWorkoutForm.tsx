@@ -8,6 +8,7 @@ export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) 
   const [type, setType] = useState("");
   const [duration, setDuration] = useState("");
   const [calories, setCalories] = useState("");
+  const [weight, setWeight] = useState("");
   const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -16,7 +17,7 @@ export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) 
     if (!type || !duration || !calories) {
       toast({
         title: "Error",
-        description: "Please fill in all fields",
+        description: "Please fill in all required fields",
         variant: "destructive",
       });
       return;
@@ -27,12 +28,14 @@ export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) 
       type,
       duration: `${duration} min`,
       calories: parseInt(calories),
+      weight: weight ? parseInt(weight) : null,
     };
 
     onAddWorkout(newWorkout);
     setType("");
     setDuration("");
     setCalories("");
+    setWeight("");
 
     toast({
       title: "Success",
@@ -71,6 +74,17 @@ export function AddWorkoutForm({ onAddWorkout }: { onAddWorkout: (workout: any) 
           value={calories}
           onChange={(e) => setCalories(e.target.value)}
           placeholder="300"
+        />
+      </div>
+
+      <div className="space-y-2">
+        <Label htmlFor="weight">Weight (optional)</Label>
+        <Input
+          id="weight"
+          type="number"
+          value={weight}
+          onChange={(e) => setWeight(e.target.value)}
+          placeholder="150"
         />
       </div>
 

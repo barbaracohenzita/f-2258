@@ -1,14 +1,15 @@
 import { Card } from "@/components/ui/card";
-import { CalendarDays, Clock, Dumbbell } from "lucide-react";
+import { CalendarDays, Clock, Dumbbell, Scale } from "lucide-react";
 
 interface WorkoutCardProps {
   date: string;
   type: string;
   duration: string;
   calories: number;
+  weight?: number | null;
 }
 
-export function WorkoutCard({ date, type, duration, calories }: WorkoutCardProps) {
+export function WorkoutCard({ date, type, duration, calories, weight }: WorkoutCardProps) {
   return (
     <Card className="stat-card animate-in">
       <div className="flex items-start justify-between">
@@ -28,6 +29,12 @@ export function WorkoutCard({ date, type, duration, calories }: WorkoutCardProps
         </div>
         <div className="font-medium">{calories} kcal</div>
       </div>
+      {weight && (
+        <div className="mt-2 flex items-center gap-2 text-sm text-muted-foreground">
+          <Scale className="w-4 h-4" />
+          <span>{weight} lbs</span>
+        </div>
+      )}
     </Card>
   );
 }
